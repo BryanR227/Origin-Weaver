@@ -4,6 +4,17 @@
         const messageInput = document.getElementById("messageInput");
         const sendButton = document.getElementById("sendButton");
         const experienceOptions = document.getElementById("experienceOptions");
+        const accountButton = document.getElementById("accountButton");
+        const authDialog = document.getElementById("authDialog");
+        const closeAuthButton = document.getElementById("closeAuthButton");
+        const authModeButtons = document.querySelectorAll("[data-auth-mode]");
+        const authTitle = document.getElementById("authTitle");
+        const authForm = document.getElementById("authForm");
+        const authPassword = document.getElementById("authPassword");
+        const authConfirmField = document.getElementById("authConfirmField");
+        const authConfirmPassword = document.getElementById("authConfirmPassword");
+        const authSubmit = document.getElementById("authSubmit");
+        const authStatus = document.getElementById("authStatus");
 
         const questionnaireByLevel = {
             new: [
@@ -27,6 +38,66 @@
         };
 
         let questionnaire = null;
+
+        function setAuthMode(mode) {
+            const isSignUp = mode === "signup";
+            authTitle.textContent = isSignUp ? "Create your account" : "Welcome back";
+            authSubmit.textContent = isSignUp ? "Create account" : "Sign in";
+            authPassword.autocomplete = isSignUp ? "new-password" : "current-password";
+            authConfirmField.hidden = !isSignUp;
+            authConfirmPassword.required = isSignUp;
+            authForm.reset();
+            authStatus.textContent = "";
+
+            authModeButtons.forEach((button) => {
+                button.setAttribute("aria-pressed", String(button.dataset.authMode === mode));
+            });
+        }
+
+        accountButton.addEventListener("click", () => {
+            setAuthMode("signin");
+            authDialog.showModal();
+            document.getElementById("authEmail").focus();
+        });
+
+        closeAuthButton.addEventListener("click", () => authDialog.close());
+
+        authModeButtons.forEach((button) => {
+            button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
+        });
+
+        authConfirmPassword.addEventListener("input", () => {
+            authConfirmPassword.setCustomValidity("");
+        });
+
+        authForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const isSignUp = authConfirmField.hidden === false;
+            if (isSignUp) {
+                authConfirmPassword.setCustomValidity(
+                    authConfirmPassword.value === authPassword.value ? "" : "Passwords must match."
+                );
+                if (!authForm.reportValidity()) {
+                    return;
+                }
+            }
+
+            authStatus.textContent = "Authentication is not connected yet; this form is a preview.";
+        });
+
+        authDialog.addEventListener("click", (event) => {
+            if (event.target !== authDialog) {
+                return;
+            }
+
+            const bounds = authDialog.getBoundingClientRect();
+            const clickedOutside = event.clientX < bounds.left || event.clientX > bounds.right ||
+                event.clientY < bounds.top || event.clientY > bounds.bottom;
+            if (clickedOutside) {
+                authDialog.close();
+            }
+        });
 
         experienceOptions.addEventListener("click", (event) => {
             const button = event.target.closest("button[data-level]");

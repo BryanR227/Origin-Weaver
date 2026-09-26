@@ -18,6 +18,9 @@
 
 .message-row.bot {
     justify-content: flex-start;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .message {
@@ -41,4 +44,37 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom-left-radius: 5px;
     backdrop-filter: blur(8px);
+}
+
+.speech-button {
+    min-height: 36px;
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 4px;
+    background: rgba(20, 20, 20, 0.75);
+    color: #ffffff;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.speech-button:hover:not(:disabled) {
+    background: rgba(70, 70, 70, 0.9);
+}
+
+.speech-button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.message-row.bot audio {
+    flex-basis: 100%;
+    width: min(70%, 420px);
+    max-width: 100%;
+}
+
+.speech-status {
+    flex-basis: 100%;
+    color: #ffd1c7;
+    font-size: 13px;
 }

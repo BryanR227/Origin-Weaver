@@ -137,9 +137,73 @@
             message.textContent = text;
 
             row.appendChild(message);
+
+            if (sender === "bot") {
+                const speechButton = document.createElement("button");
+                speechButton.type = "button";
+                speechButton.className = "speech-button";
+                speechButton.textContent = "Listen";
+                speechButton.setAttribute("aria-label", "Listen to this reply");
+                speechButton.addEventListener("click", () => playReplyAudio(text, row, speechButton));
+                row.appendChild(speechButton);
+            }
+
             messages.appendChild(row);
 
             messages.scrollTop = messages.scrollHeight;
+        }
+
+        async function playReplyAudio(text, row, button) {
+            const existingAudio = row.querySelector("audio");
+            if (existingAudio) {
+                existingAudio.currentTime = 0;
+                existingAudio.play().catch(() => {});
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Preparing...";
+
+            try {
+                const response = await fetch("/api/speech", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text })
+                });
+                const data = response.headers.get("content-type")?.includes("application/json")
+                    ? await response.json()
+                    : null;
+
+                if (!response.ok) {
+                    throw new Error(data?.error || "Could not generate audio.");
+                }
+
+                const audio = document.createElement("audio");
+                audio.controls = true;
+                audio.preload = "metadata";
+                audio.src = URL.createObjectURL(await response.blob());
+                audio.setAttribute("aria-label", "Reply audio playback");
+                row.appendChild(audio);
+                button.textContent = "Replay";
+
+                try {
+                    await audio.play();
+                } catch {
+                    button.textContent = "Play audio";
+                }
+            } catch (error) {
+                let status = row.querySelector(".speech-status");
+                if (!status) {
+                    status = document.createElement("span");
+                    status.className = "speech-status";
+                    status.setAttribute("role", "status");
+                    row.appendChild(status);
+                }
+                status.textContent = error.message;
+                button.textContent = "Retry audio";
+            } finally {
+                button.disabled = false;
+            }
         }
 
 

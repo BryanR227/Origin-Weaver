@@ -54,6 +54,31 @@
             color: #777;
         }
 
+        .experience-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 24px auto 0;
+            padding: 0 16px;
+        }
+
+        .experience-options button {
+            min-height: 42px;
+            padding: 0 16px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            background: #fff;
+            color: #222;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .experience-options button:hover {
+            border-color: #222;
+            background: #f5f5f5;
+        }
+
         /* Move welcome to top after first message */
 
         .chat-container.started .welcome {
@@ -67,6 +92,10 @@
 
         .chat-container.started .welcome p {
             font-size: 15px;
+        }
+
+        .chat-container.started .experience-options {
+            display: none;
         }
 
         /* Messages */
@@ -93,6 +122,10 @@
             justify-content: flex-start;
         }
 
+        .message-row.guide {
+            justify-content: flex-start;
+        }
+
         .message {
             max-width: 70%;
             padding: 12px 16px;
@@ -110,6 +143,13 @@
         .message-row.bot .message {
             background: #f1f1f1;
             color: #222;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-row.guide .message {
+            background: #fff8e8;
+            color: #3b3324;
+            border: 1px solid #e5d4ae;
             border-bottom-left-radius: 5px;
         }
 

@@ -7,7 +7,7 @@ from urllib.request import Request as UrlRequest, urlopen
 from dotenv import load_dotenv
 from flask import Flask, Response, jsonify, request, send_from_directory
 from google import genai
-from google.genai.errors import ServerError
+from google.genai.errors import ClientError, ServerError
 from agent import Agent
 
 load_dotenv(override=True)
@@ -15,7 +15,6 @@ load_dotenv(override=True)
 key = os.environ.get("GEMINI_API_KEY")
 
 print("Gemini key loaded:", bool(key))
-print("Gemini key ending:", key[-6:] if key else "NONE")
 
 client = genai.Client(api_key=key)
 
@@ -39,10 +38,28 @@ def chat():
         reply = agent.respond(message)
         return jsonify({"reply": reply})
 
-    except ServerError:
+    except ClientError as error:
+        if error.code == 429 or error.status == "RESOURCE_EXHAUSTED":
+            app.logger.warning("Gemini request quota exhausted")
+            return jsonify({
+                "error": "Gemini's request quota is exhausted. Wait for it to reset or check your Google AI Studio limits and billing."
+            }), 429
+
+        app.logger.warning("Gemini rejected the request with HTTP %s", error.code)
+        return jsonify({
+            "error": "Gemini rejected the request. Check the API key and request configuration."
+        }), 502
+
+    except ServerError as error:
+        app.logger.warning("Gemini request failed: %s", error)
         return jsonify({
             "error": "Gemini is temporarily unavailable."
         }), 503
+    except Exception:
+        app.logger.exception("Unexpected error while handling chat request")
+        return jsonify({
+            "error": "Could not process your chat message."
+        }), 500
 
 @app.post("/api/speech")
 def speech():

@@ -3,6 +3,10 @@ import json
 
 from google import genai
 
+from tools import get_class_info
+
+from google.genai import types
+
 class Agent:
     def __init__(self):
         self.client = genai.Client(
@@ -14,11 +18,13 @@ class Agent:
 
         self.chat = self.client.chats.create(
             model="gemini-3.8-flash",
-            config={
-                "system_instruction": personality["system_prompt"]
-            }
+            config=types.GenerateContentConfig(
+                system_instruction=personality["system_prompt"],
+                tools=[get_class_info],
+                max_output_tokens=1000,
+            )
         )
-
+        
     def respond(self, message):
         response = self.chat.send_message(message)
         return response.text or ""

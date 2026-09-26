@@ -4,11 +4,11 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify, request, send_from_directory
 from google import genai
 from google.genai.errors import ServerError
-from gemini.agent import Agent
-
-agent = Agent()
+from agent import Agent
 
 load_dotenv()
+
+agent = Agent()
 
 app = Flask(__name__, static_folder="../frontend", static_url_path="")
 
@@ -25,7 +25,7 @@ def chat():
         return jsonify({"error": "Message is required"}), 400
 
     try:
-        reply = Agent.respond(message)
+        reply = agent.respond(message)
         return jsonify({"reply": reply})
 
     except ServerError:

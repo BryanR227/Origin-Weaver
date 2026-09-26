@@ -1,7 +1,6 @@
 import os
 from google import genai
 
-
 class Agent:
     def __init__(self):
         self.client = genai.Client(

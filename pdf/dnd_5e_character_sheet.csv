@@ -1,0 +1,147 @@
+section,field,value,format_hint
+Header,Character Name,,text
+Header,Class & Level,,e.g. "Fighter 3"
+Header,Background,,text
+Header,Player Name,,text
+Header,Race,,text
+Header,Alignment,,e.g. "Lawful Good"
+Header,Experience Points,,integer
+Ability Scores,Strength,,integer 1-30
+Ability Scores,Strength Modifier,,integer (calculated)
+Ability Scores,Dexterity,,integer 1-30
+Ability Scores,Dexterity Modifier,,integer (calculated)
+Ability Scores,Constitution,,integer 1-30
+Ability Scores,Constitution Modifier,,integer (calculated)
+Ability Scores,Intelligence,,integer 1-30
+Ability Scores,Intelligence Modifier,,integer (calculated)
+Ability Scores,Wisdom,,integer 1-30
+Ability Scores,Wisdom Modifier,,integer (calculated)
+Ability Scores,Charisma,,integer 1-30
+Ability Scores,Charisma Modifier,,integer (calculated)
+Core Stats,Inspiration,,boolean (0/1)
+Core Stats,Proficiency Bonus,,integer
+Core Stats,Armor Class,,integer
+Core Stats,Initiative,,integer
+Core Stats,Speed,,integer (feet)
+Core Stats,Hit Point Maximum,,integer
+Core Stats,Current Hit Points,,integer
+Core Stats,Temporary Hit Points,,integer
+Core Stats,Hit Dice Total,,e.g. "3d10"
+Core Stats,Hit Dice Used,,integer
+Core Stats,Death Save Successes,,integer 0-3
+Core Stats,Death Save Failures,,integer 0-3
+Core Stats,Passive Wisdom (Perception),,integer (calculated)
+Saving Throws,Strength Save Proficient,,boolean (0/1)
+Saving Throws,Strength Save Bonus,,integer (calculated)
+Saving Throws,Dexterity Save Proficient,,boolean (0/1)
+Saving Throws,Dexterity Save Bonus,,integer (calculated)
+Saving Throws,Constitution Save Proficient,,boolean (0/1)
+Saving Throws,Constitution Save Bonus,,integer (calculated)
+Saving Throws,Intelligence Save Proficient,,boolean (0/1)
+Saving Throws,Intelligence Save Bonus,,integer (calculated)
+Saving Throws,Wisdom Save Proficient,,boolean (0/1)
+Saving Throws,Wisdom Save Bonus,,integer (calculated)
+Saving Throws,Charisma Save Proficient,,boolean (0/1)
+Saving Throws,Charisma Save Bonus,,integer (calculated)
+Skills,Acrobatics (Dex) Proficient,,boolean (0/1)
+Skills,Acrobatics (Dex) Bonus,,integer (calculated)
+Skills,Animal Handling (Wis) Proficient,,boolean (0/1)
+Skills,Animal Handling (Wis) Bonus,,integer (calculated)
+Skills,Arcana (Int) Proficient,,boolean (0/1)
+Skills,Arcana (Int) Bonus,,integer (calculated)
+Skills,Athletics (Str) Proficient,,boolean (0/1)
+Skills,Athletics (Str) Bonus,,integer (calculated)
+Skills,Deception (Cha) Proficient,,boolean (0/1)
+Skills,Deception (Cha) Bonus,,integer (calculated)
+Skills,History (Int) Proficient,,boolean (0/1)
+Skills,History (Int) Bonus,,integer (calculated)
+Skills,Insight (Wis) Proficient,,boolean (0/1)
+Skills,Insight (Wis) Bonus,,integer (calculated)
+Skills,Intimidation (Cha) Proficient,,boolean (0/1)
+Skills,Intimidation (Cha) Bonus,,integer (calculated)
+Skills,Investigation (Int) Proficient,,boolean (0/1)
+Skills,Investigation (Int) Bonus,,integer (calculated)
+Skills,Medicine (Wis) Proficient,,boolean (0/1)
+Skills,Medicine (Wis) Bonus,,integer (calculated)
+Skills,Nature (Int) Proficient,,boolean (0/1)
+Skills,Nature (Int) Bonus,,integer (calculated)
+Skills,Perception (Wis) Proficient,,boolean (0/1)
+Skills,Perception (Wis) Bonus,,integer (calculated)
+Skills,Performance (Cha) Proficient,,boolean (0/1)
+Skills,Performance (Cha) Bonus,,integer (calculated)
+Skills,Persuasion (Cha) Proficient,,boolean (0/1)
+Skills,Persuasion (Cha) Bonus,,integer (calculated)
+Skills,Religion (Int) Proficient,,boolean (0/1)
+Skills,Religion (Int) Bonus,,integer (calculated)
+Skills,Sleight of Hand (Dex) Proficient,,boolean (0/1)
+Skills,Sleight of Hand (Dex) Bonus,,integer (calculated)
+Skills,Stealth (Dex) Proficient,,boolean (0/1)
+Skills,Stealth (Dex) Bonus,,integer (calculated)
+Skills,Survival (Wis) Proficient,,boolean (0/1)
+Skills,Survival (Wis) Bonus,,integer (calculated)
+Attacks & Spellcasting,Attack 1 Name,,text
+Attacks & Spellcasting,Attack 1 Bonus,,integer
+Attacks & Spellcasting,Attack 1 Damage/Type,,e.g. "1d8+3 slashing"
+Attacks & Spellcasting,Attack 2 Name,,text
+Attacks & Spellcasting,Attack 2 Bonus,,integer
+Attacks & Spellcasting,Attack 2 Damage/Type,,text
+Attacks & Spellcasting,Attack 3 Name,,text
+Attacks & Spellcasting,Attack 3 Bonus,,integer
+Attacks & Spellcasting,Attack 3 Damage/Type,,text
+Equipment,Copper Pieces (CP),,integer
+Equipment,Silver Pieces (SP),,integer
+Equipment,Electrum Pieces (EP),,integer
+Equipment,Gold Pieces (GP),,integer
+Equipment,Platinum Pieces (PP),,integer
+Equipment,Equipment List,,free text (comma or newline separated)
+Proficiencies & Languages,Other Proficiencies & Languages,,free text
+Traits,Personality Traits,,free text
+Traits,Ideals,,free text
+Traits,Bonds,,free text
+Traits,Flaws,,free text
+Traits,Features & Traits,,free text
+Traits,Additional Features & Traits,,free text
+Personal Characteristics,Age,,integer
+Personal Characteristics,Height,,text
+Personal Characteristics,Weight,,text
+Personal Characteristics,Eyes,,text
+Personal Characteristics,Skin,,text
+Personal Characteristics,Hair,,text
+Personal Characteristics,Character Appearance,,free text
+Personal Characteristics,Character Backstory,,free text
+Allies & Organizations,Ally/Organization 1 Name,,text
+Allies & Organizations,Ally/Organization 1 Symbol Description,,text
+Allies & Organizations,Allies & Organizations Notes,,free text
+Treasure,Treasure,,free text
+Spellcasting,Spellcasting Class,,text
+Spellcasting,Spellcasting Ability,,e.g. "Intelligence"
+Spellcasting,Spell Save DC,,integer
+Spellcasting,Spell Attack Bonus,,integer
+Spellcasting,Cantrips Known,,free text (comma or newline separated)
+Spellcasting,Level 1 Slots Total,,integer
+Spellcasting,Level 1 Slots Expended,,integer
+Spellcasting,Level 1 Spells (Prepared marked with *),,free text (comma or newline separated)
+Spellcasting,Level 2 Slots Total,,integer
+Spellcasting,Level 2 Slots Expended,,integer
+Spellcasting,Level 2 Spells (Prepared marked with *),,free text
+Spellcasting,Level 3 Slots Total,,integer
+Spellcasting,Level 3 Slots Expended,,integer
+Spellcasting,Level 3 Spells (Prepared marked with *),,free text
+Spellcasting,Level 4 Slots Total,,integer
+Spellcasting,Level 4 Slots Expended,,integer
+Spellcasting,Level 4 Spells (Prepared marked with *),,free text
+Spellcasting,Level 5 Slots Total,,integer
+Spellcasting,Level 5 Slots Expended,,integer
+Spellcasting,Level 5 Spells (Prepared marked with *),,free text
+Spellcasting,Level 6 Slots Total,,integer
+Spellcasting,Level 6 Slots Expended,,integer
+Spellcasting,Level 6 Spells (Prepared marked with *),,free text
+Spellcasting,Level 7 Slots Total,,integer
+Spellcasting,Level 7 Slots Expended,,integer
+Spellcasting,Level 7 Spells (Prepared marked with *),,free text
+Spellcasting,Level 8 Slots Total,,integer
+Spellcasting,Level 8 Slots Expended,,integer
+Spellcasting,Level 8 Spells (Prepared marked with *),,free text
+Spellcasting,Level 9 Slots Total,,integer
+Spellcasting,Level 9 Slots Expended,,integer
+Spellcasting,Level 9 Spells (Prepared marked with *),,free text

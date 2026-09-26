@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="welcome.css">
     <link rel="stylesheet" href="messages.css">
     <link rel="stylesheet" href="composer.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="responsive.css">
     <link rel="icon" type="image/png" href="docs/pics/favicon.png">
 
@@ -24,6 +25,10 @@
             <source src="docs/gifs/barkeep.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+
+        <button class="account-button" id="accountButton" type="button">
+            Sign in / Sign up
+        </button>
 
         <main class="chat-container" id="chatContainer">
 
@@ -60,6 +65,40 @@
         </main>
 
     </div>
+
+    <dialog class="auth-dialog" id="authDialog" aria-labelledby="authTitle">
+        <div class="auth-header">
+            <div>
+                <p class="auth-eyebrow">Origin Weaver</p>
+                <h2 id="authTitle">Welcome back</h2>
+            </div>
+            <button class="auth-close" id="closeAuthButton" type="button" aria-label="Close sign in dialog">
+                &times;
+            </button>
+        </div>
+
+        <div class="auth-mode" role="group" aria-label="Choose sign in or sign up">
+            <button type="button" data-auth-mode="signin" aria-pressed="true">Sign in</button>
+            <button type="button" data-auth-mode="signup" aria-pressed="false">Sign up</button>
+        </div>
+
+        <form class="auth-form" id="authForm">
+            <label>
+                Email
+                <input id="authEmail" name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+                Password
+                <input id="authPassword" name="password" type="password" autocomplete="current-password" minlength="8" required>
+            </label>
+            <label id="authConfirmField" hidden>
+                Confirm password
+                <input id="authConfirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8">
+            </label>
+            <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
+            <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
+        </form>
+    </dialog>
 
     <script src="chat.js"></script>
 

@@ -59,36 +59,32 @@ body {
     color: #777;
 }
 
-<<<<<<< HEAD
-        .experience-options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 24px auto 0;
-            padding: 0 16px;
-        }
+ .experience-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 24px auto 0;
+    padding: 0 16px;
+}
 
-        .experience-options button {
-            min-height: 42px;
-            padding: 0 16px;
-            border: 1px solid #bbb;
-            border-radius: 6px;
-            background: #fff;
-            color: #222;
-            font: inherit;
-            cursor: pointer;
-        }
+.experience-options button {
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    background: #fff;
+    color: #222;
+    font: inherit;
+    cursor: pointer;
+}
 
-        .experience-options button:hover {
-            border-color: #222;
-            background: #f5f5f5;
-        }
+.experience-options button:hover {
+    border-color: #222;
+    background: #f5f5f5;
+}
 
-        /* Move welcome to top after first message */
-=======
 /* Move welcome to top after first message */
->>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
 .chat-container.started .welcome {
     top: 60px;
@@ -103,15 +99,11 @@ body {
     font-size: 15px;
 }
 
-<<<<<<< HEAD
-        .chat-container.started .experience-options {
-            display: none;
-        }
+.chat-container.started .experience-options {
+    display: none;
+}
 
-        /* Messages */
-=======
 /* Messages */
->>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
 .messages {
     width: 100%;
@@ -135,19 +127,10 @@ body {
     justify-content: flex-start;
 }
 
-<<<<<<< HEAD
-        .message-row.guide {
-            justify-content: flex-start;
-        }
+.message-row.guide {
+    justify-content: flex-start;
+}
 
-        .message {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-=======
 .message {
     max-width: 70%;
     padding: 12px 16px;
@@ -155,7 +138,6 @@ body {
     font-size: 16px;
     line-height: 1.5;
 }
->>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
 .message-row.user .message {
     background: #222;
@@ -169,18 +151,14 @@ body {
     border-bottom-left-radius: 5px;
 }
 
-<<<<<<< HEAD
-        .message-row.guide .message {
-            background: #fff8e8;
-            color: #3b3324;
-            border: 1px solid #e5d4ae;
-            border-bottom-left-radius: 5px;
-        }
+.message-row.guide .message {
+    background: #fff8e8;
+    color: #3b3324;
+    border: 1px solid #e5d4ae;
+    border-bottom-left-radius: 5px;
+}
 
-        /* Input */
-=======
 /* Input */
->>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
 .input-container {
     position: absolute;

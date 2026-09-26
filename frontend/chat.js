@@ -1,8 +1,15 @@
+<<<<<<< HEAD
         const chatContainer = document.getElementById("chatContainer");
         const messages = document.getElementById("messages");
         const messageInput = document.getElementById("messageInput");
         const sendButton = document.getElementById("sendButton");
         const experienceOptions = document.getElementById("experienceOptions");
+=======
+const chatContainer = document.getElementById("chatContainer");
+const messages = document.getElementById("messages");
+const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+>>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
         const questionnaireByLevel = {
             new: [
@@ -59,6 +66,7 @@
         });
 
         async function sendMessage() {
+<<<<<<< HEAD
             const text = messageInput.value.trim();
             if (text === "") {
                 return;
@@ -67,6 +75,24 @@
             chatContainer.classList.add("started");
             addMessage(text, "user");
             messageInput.value = "";
+=======
+
+    const text = messageInput.value.trim();
+
+    // Don't send empty messages
+    if (text === "") {
+        return;
+    }
+
+    // Move welcome message to the top
+    chatContainer.classList.add("started");
+
+    // Add user's message
+    addMessage(text, "user");
+
+    // Clear input
+    messageInput.value = "";
+>>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
             if (questionnaire) {
                 questionnaire.answers.push(text);
@@ -126,23 +152,31 @@
         }
 
 
+<<<<<<< HEAD
         function addMessage(text, sender) {
             const row = document.createElement("div");
             row.classList.add("message-row", sender);
+=======
+function addMessage(text, sender) { 
 
-            const message = document.createElement("div");
-            message.classList.add("message");
+    const row = document.createElement("div");
+    row.classList.add("message-row", sender);
+>>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
 
-            message.textContent = text;
+    const message = document.createElement("div");
+    message.classList.add("message");
 
-            row.appendChild(message);
-            messages.appendChild(row);
+    message.textContent = text;
 
-            // Scroll to newest message
-            messages.scrollTop = messages.scrollHeight;
-        }
+    row.appendChild(message);
+    messages.appendChild(row);
+
+    // Scroll to newest message
+    messages.scrollTop = messages.scrollHeight;
+}
 
 
+<<<<<<< HEAD
         sendButton.addEventListener("click", sendMessage);
 
         messageInput.addEventListener("keydown", function(event) {
@@ -151,4 +185,20 @@
                 sendMessage();
             }
         });
+=======
+// Send button
+sendButton.addEventListener("click", sendMessage);
 
+
+// Enter to send
+messageInput.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter" && !event.shiftKey) {
+
+        event.preventDefault();
+
+        sendMessage();
+    }
+>>>>>>> d6910694c80b55d1bb3c203a5afed66fb9ff3608
+
+});

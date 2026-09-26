@@ -12,17 +12,28 @@
         visibility 0s linear 0.6s;
 }
 
+.welcome h1,
+.welcome p {
+    width: fit-content;
+    max-width: 100%;
+    padding: 8px 16px;
+    background: rgba(30, 30, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+}
+
 .welcome h1 {
-    margin: 0;
+    margin: 0 auto;
     font-size: 42px;
     font-weight: 600;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .welcome p {
-    margin-top: 10px;
+    margin: 10px auto 0;
     font-size: 18px;
-    color: #cccccc;
+    color: #ffffff;
 }
 
 .chat-container.started .welcome {

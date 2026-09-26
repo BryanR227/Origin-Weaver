@@ -4,7 +4,7 @@
         const sendButton = document.getElementById("sendButton");
 
 
-        function sendMessage() {
+        async function sendMessage() {
 
             const text = messageInput.value.trim();
 
@@ -22,13 +22,29 @@
             // Clear input
             messageInput.value = "";
 
-            // Temporary frontend-only chatbot response
-            setTimeout(() => {
-                addMessage(
-                    "This is a frontend demo response.",
-                    "bot"
-                );
-            }, 500);
+            messageInput.disabled = true;
+            sendButton.disabled = true;
+
+            try {
+                const response = await fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Request failed.");
+                }
+
+                addMessage(data.reply || "Gemini returned an empty response.", "bot");
+            } catch (error) {
+                addMessage(`Could not get a reply: ${error.message}`, "bot");
+            } finally {
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                messageInput.focus();
+            }
         }
 
 

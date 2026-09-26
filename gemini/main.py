@@ -10,7 +10,14 @@ from google import genai
 from google.genai.errors import ServerError
 from agent import Agent
 
-load_dotenv()
+load_dotenv(override=True)
+
+key = os.environ.get("GEMINI_API_KEY")
+
+print("Gemini key loaded:", bool(key))
+print("Gemini key ending:", key[-6:] if key else "NONE")
+
+client = genai.Client(api_key=key)
 
 agent = Agent()
 

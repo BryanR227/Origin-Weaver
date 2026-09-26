@@ -1,4 +1,6 @@
 import os
+import json
+
 from google import genai
 
 class Agent:
@@ -7,8 +9,14 @@ class Agent:
             api_key=os.environ["GEMINI_API_KEY"]
         )
 
+        with open("personality.json", "r", encoding="utf-8") as f:
+            personality = json.load(f)
+
         self.chat = self.client.chats.create(
-            model="gemini-3.8-flash"
+            model="gemini-3.8-flash",
+            config={
+                "system_instruction": personality["system_prompt"]
+            }
         )
 
     def respond(self, message):

@@ -1,0 +1,27 @@
+@media (max-width: 600px) {
+    .chat-container {
+        padding: 0 16px;
+    }
+
+    .welcome h1 {
+        font-size: 34px;
+    }
+
+    .welcome p {
+        font-size: 16px;
+    }
+
+    .messages {
+        padding-top: 105px;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    .input-container {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+    }
+}

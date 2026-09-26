@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Origin Weaver</title>
 
-    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="welcome.css">
+    <link rel="stylesheet" href="messages.css">
+    <link rel="stylesheet" href="composer.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="icon" type="image/png" href="docs/pics/favicon.png">
 
- 
+
 </head>
 
 <body>
 
     <div class="app">
+
+        <video autoplay muted loop playsinline poster="fallback-image.jpg" class="video-background">
+            <source src="docs/gifs/barkeep.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
         <main class="chat-container" id="chatContainer">
 
@@ -36,17 +46,9 @@
             <!-- Message input -->
             <div class="input-container">
 
-                <textarea
-                    id="messageInput"
-                    placeholder="Type your message..."
-                    rows="1"
-                ></textarea>
+                <textarea id="messageInput" placeholder="Type your message..." rows="1"></textarea>
 
-                <button
-                    class="send-button"
-                    id="sendButton"
-                    aria-label="Send message"
-                >
+                <button class="send-button" id="sendButton" aria-label="Send message">
                     ↑
                 </button>
 
@@ -56,7 +58,8 @@
 
     </div>
 
-<script src="chat.js"></script>
+    <script src="chat.js"></script>
 
 </body>
+
 </html>

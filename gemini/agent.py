@@ -1,5 +1,6 @@
 import os
 import json
+from pathlib import Path
 
 from google import genai
 
@@ -13,7 +14,8 @@ class Agent:
             api_key=os.environ["GEMINI_API_KEY"]
         )
 
-        with open("personality.json", "r", encoding="utf-8") as f:
+        personality_path = Path(__file__).with_name("personality.json")
+        with personality_path.open("r", encoding="utf-8") as f:
             personality = json.load(f)
 
         self.chat = self.client.chats.create(

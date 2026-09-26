@@ -14,13 +14,15 @@ The frontend uses HTML, CSS, and JavaScript for the chatbox and interfaces. Its 
 
 
 **Challenges we ran into**<br /><br />
-The first issue we ran into was not code related as we had to decide what the scope of the project is. Then we portioned the work between the group members based on experience. For the frontend, the landing evolved from a basic chatbot page to themed paged with a animated background.
+The first issue we ran into was not code related as we had to decide what the scope of the project is. Then we portioned the work between the group members based on experience. For the frontend, the landing evolved from a basic chatbot page to themed paged with a animated background. While working on the Elevenlabs text to voice, we ran into the issue that the chat messages were returned in markdown format. As workaround the markdown was rewritten into a text file first. We made sure the voice package could be paused and scrubbed. 
 
 
 **Accomplishments that we're proud of**<br /><br />
+We are proud that we were able to come together and come about withna finished product by the evening of the first day.
 
 
 **What we learned**<br /><br />
+
 
 
 **What's next for Origin Weaver**<br /><br />

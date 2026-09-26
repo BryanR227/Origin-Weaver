@@ -1,5 +1,3 @@
-
-
         const chatContainer = document.getElementById("chatContainer");
         const messages = document.getElementById("messages");
         const messageInput = document.getElementById("messageInput");
@@ -34,7 +32,7 @@
         }
 
 
-        function addMessage(text, sender) {
+        function addMessage(text, sender) { 
 
             const row = document.createElement("div");
             row.classList.add("message-row", sender);

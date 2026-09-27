@@ -148,7 +148,7 @@
                 } else {
                     const prompt = buildCharacterBrief();
                     questionnaire = null;
-                    requestReply(prompt);
+                    requestReply(prompt, true);
                 }
                 return;
             }
@@ -170,7 +170,7 @@
             return `Help me create a D&D character using this questionnaire. Player experience: ${questionnaire.level}. Match the detail and terminology to that experience level. Treat unspecified details as open choices.\n\n${answers}`;
         }
 
-        async function requestReply(message) {
+        async function requestReply(message, generateSheet = false) {
             messageInput.disabled = true;
             sendButton.disabled = true;
 
@@ -178,7 +178,7 @@
                 const response = await fetch("/api/chat", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message })
+                    body: JSON.stringify({ message, generate_sheet: generateSheet })
                 });
                 const contentType = response.headers.get("content-type") || "";
                 if (!contentType.includes("application/json")) {
@@ -190,7 +190,7 @@
                     throw new Error(data.error || "Request failed.");
                 }
 
-                addMessage(data.reply || "Gemini returned an empty response.", "bot");
+                addMessage(data.reply || "Gemini returned an empty response.", "bot", data.pdf_url);
             } catch (error) {
                 addMessage(`Could not get a reply: ${error.message}`, "bot");
             } finally {
@@ -202,7 +202,7 @@
         }
 
 
-        function addMessage(text, sender) {
+        function addMessage(text, sender, pdfUrl = null) {
             const row = document.createElement("div");
             row.classList.add("message-row", sender);
 
@@ -214,6 +214,28 @@
                 content.classList.add("message-content");
                 renderMarkdown(content, text);
                 message.appendChild(content);
+
+                if (pdfUrl) {
+                    const sheetUrl = new URL(pdfUrl, window.location.origin);
+                    if (sheetUrl.origin === window.location.origin && sheetUrl.pathname.startsWith("/api/characters/")) {
+                        message.classList.add("has-character-sheet");
+
+                        const preview = document.createElement("iframe");
+                        preview.className = "character-sheet-preview";
+                        preview.title = "Generated D&D character sheet PDF";
+                        preview.loading = "lazy";
+                        preview.src = sheetUrl.href;
+                        message.appendChild(preview);
+
+                        const downloadLink = document.createElement("a");
+                        downloadLink.className = "character-sheet-download";
+                        downloadLink.href = sheetUrl.href;
+                        downloadLink.target = "_blank";
+                        downloadLink.rel = "noopener noreferrer";
+                        downloadLink.textContent = "Open or download character sheet PDF";
+                        message.appendChild(downloadLink);
+                    }
+                }
             } else {
                 message.textContent = text;
             }

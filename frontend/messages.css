@@ -46,6 +46,34 @@
     backdrop-filter: blur(8px);
 }
 
+.message-row.bot .message.has-character-sheet {
+    width: min(80%, 760px);
+    max-width: 80%;
+}
+
+.character-sheet-preview {
+    display: block;
+    width: 100%;
+    height: min(70vh, 640px);
+    min-height: 320px;
+    margin-top: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.character-sheet-download {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.character-sheet-download:hover {
+    color: #d7f1e8;
+}
+
 .message-content {
     max-width: 100%;
     overflow-x: auto;

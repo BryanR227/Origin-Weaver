@@ -4,8 +4,7 @@ from pathlib import Path
 
 from google import genai
 from google.genai import types
-from tools import (BACKGROUNDS, CLASSES, EQUIPMENT, FEATS, SPECIES, SPELLS,
-                   get_class_info)
+from tools import get_class_info
 
 
 class Agent:
@@ -48,23 +47,14 @@ class Agent:
             },
             "required": ["reply", "fields"],
         }
-        catalogs = json.dumps({
-            "classes": CLASSES,
-            "species": SPECIES,
-            "backgrounds": BACKGROUNDS,
-            "feats": FEATS,
-            "spells": SPELLS,
-            "equipment": EQUIPMENT,
-        })
         generation_instructions = (
             f"{self.system_instruction}\n\n"
             "Create a D&D character sheet from the user's request. Return the short, readable "
             "character explanation in reply and a value for every supplied CSV key in fields. "
             "Every field value must be a string. Use an empty string for unknown, optional, or "
             "unprovided personal details instead of inventing them. Use 0 or 1 for proficiency "
-            "checkbox values. Keep comma-separated values suitable for the CSV sheet. Treat the "
-            "catalog data below as the available reference; do not claim it is exhaustive.\n\n"
-            f"Catalog data: {catalogs}"
+            "checkbox values. Keep comma-separated values suitable for the CSV sheet. Use "
+            "standard D&D 5e conventions and do not claim access to exhaustive source catalogs."
         )
         prompt = f"Character request:\n{message}\n\nCSV field keys:\n" + "\n".join(field_keys)
         response = self.client.models.generate_content(

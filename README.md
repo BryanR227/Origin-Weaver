@@ -1,6 +1,6 @@
 # Origin-Weaver [origin-weaver](https://origin-weaver.design/frontend/index.html)
 <p align="center">
-  <img width="440" height="440" alt="Screenshot 2026-09-26" src="frontend/docs/pics/favicon.png" />
+  <img width="440" height="440" alt="Screenshot 2026-09-26" src="frontend/docs/pics/favicon.webp" />
 </p>
 
 ## Inspiration
@@ -26,7 +26,7 @@ We are proud that we were able to come together and come about with a finished p
 
 
 **What's next for Origin Weaver**<br /><br />
-We look to keep polishing the current project to ensure accuracy and reduce hallucinations. Afterwards a potential addition would be the AI running a small chatbox based oneshot to onboard the new player. We'll look into clarifying the different paths. Newish player will be 
+We look to keep polishing the current project to ensure accuracy and reduce hallucinations. Afterwards a potential addition would be the AI running a small chatbox based oneshot to onboard the new player. We'll look into clarifying the different paths. New players will be handheld through the entire character creation
 
 ## Character Sheet Generation
 

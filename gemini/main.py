@@ -81,7 +81,7 @@ def chat():
                 return jsonify({
                     "error": "Gemini's request quota is exhausted. Wait for it to reset or check your Google AI Studio limits and billing."
                 }), 429
-            app.logger.warning("Gemini rejected the character request with HTTP %s", error.code)
+            app.logger.warning("Gemini rejected the character request: %s", error)
             return jsonify({
                 "error": "Gemini rejected the character request. Check the API key and request configuration."
             }), 502

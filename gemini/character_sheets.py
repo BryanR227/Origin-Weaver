@@ -39,7 +39,9 @@ def write_character_csv(field_values: Mapping[str, str], output_path):
     allowed_keys = {f"{row['section']}||{row['field']}" for row in rows}
     unknown_keys = set(field_values) - allowed_keys
     if unknown_keys:
-        raise ValueError(f"Unknown character sheet fields: {', '.join(sorted(unknown_keys))}")
+        raise ValueError(
+            f"Unknown character sheet fields: {', '.join(sorted(unknown_keys))}"
+        )
 
     for key, value in field_values.items():
         if not isinstance(value, str):

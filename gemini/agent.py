@@ -4,8 +4,7 @@ from pathlib import Path
 
 from google import genai
 from google.genai import types
-from tools import (BACKGROUNDS, CLASSES, EQUIPMENT, FEATS, SPECIES, SPELLS,
-                   get_class_info)
+from tools import get_class_info
 
 
 class Agent:
@@ -35,38 +34,45 @@ class Agent:
 
     def generate_character(self, message, field_keys):
         """Return a short explanation and values matching the character CSV schema."""
-        fields_schema = {
-            "type": "OBJECT",
-            "properties": {key: {"type": "STRING"} for key in field_keys},
-            "required": field_keys,
-        }
         response_schema = {
             "type": "OBJECT",
             "properties": {
-                "reply": {"type": "STRING"},
-                "fields": fields_schema,
+                "reply": {
+                    "type": "STRING"
+                },
+                "fields": {
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "key": {
+                                "type": "STRING"
+                            },
+                            "value": {
+                                "type": "STRING"
+                            }
+                        },
+                        "required": ["key", "value"]
+                    }
+                }
             },
-            "required": ["reply", "fields"],
+            "required": ["reply", "fields"]
         }
-        catalogs = json.dumps({
-            "classes": CLASSES,
-            "species": SPECIES,
-            "backgrounds": BACKGROUNDS,
-            "feats": FEATS,
-            "spells": SPELLS,
-            "equipment": EQUIPMENT,
-        })
         generation_instructions = (
             f"{self.system_instruction}\n\n"
-            "Create a D&D character sheet from the user's request. Return the short, readable "
-            "character explanation in reply and a value for every supplied CSV key in fields. "
-            "Every field value must be a string. Use an empty string for unknown, optional, or "
-            "unprovided personal details instead of inventing them. Use 0 or 1 for proficiency "
-            "checkbox values. Keep comma-separated values suitable for the CSV sheet. Treat the "
-            "catalog data below as the available reference; do not claim it is exhaustive.\n\n"
-            f"Catalog data: {catalogs}"
+            "Create a D&D character sheet from the user's request. "
+            "Return a short, readable character explanation in reply. "
+            "Return character-sheet values in the fields array as key/value pairs. "
+            "The key must exactly match one of the supplied CSV field keys. "
+            "Every value must be a string. "
+            "Use an empty string for unknown, optional, or unprovided personal details "
+            "instead of inventing them. "
+            "Use 0 or 1 for proficiency checkbox values. "
+            "Keep comma-separated values suitable for the CSV sheet. "
+            "Use standard D&D 5e conventions and do not claim access to exhaustive source catalogs."
         )
         prompt = f"Character request:\n{message}\n\nCSV field keys:\n" + "\n".join(field_keys)
+        print("Character field count:", len(field_keys))
         response = self.client.models.generate_content(
             model=self.model,
             contents=prompt,
@@ -82,17 +88,27 @@ class Agent:
             result = json.loads(response.text or "")
         except json.JSONDecodeError as error:
             raise ValueError("Gemini returned invalid character-sheet data.") from error
+        
+        returned_fields = result.get("fields", [])
 
-        if not isinstance(result, dict) or not isinstance(result.get("fields"), dict):
-            raise TypeError("Gemini returned an incomplete character sheet.")
+        if not isinstance(returned_fields, list):
+            raise TypeError("Gemini returned invalid character field data.")
 
         fields = {}
-        for key in field_keys:
-            value = result["fields"].get(key, "")
-            if value is None:
-                value = ""
-            if not isinstance(value, str):
-                raise TypeError(f"Gemini returned a non-text value for {key}.")
+
+        for item in returned_fields:
+            if not isinstance(item, dict):
+                raise TypeError("Gemini returned an invalid character field.")
+
+            key = item.get("key", "")
+            value = item.get("value", "")
+
+            if not isinstance(key, str) or not isinstance(value, str):
+                raise TypeError("Gemini returned a non-text character field.")
+
+            if key not in field_keys:
+                raise ValueError(f"Gemini returned an unknown character field: {key}")
+
             fields[key] = value
 
         reply = result.get("reply", "")

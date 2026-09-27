@@ -142,6 +142,27 @@ def character_sheet(character_id):
         max_age=0,
     )
 
+
+@app.get("/api/characters/<character_id>/sheet")
+def character_sheet(character_id):
+    try:
+        safe_character_id = uuid.UUID(character_id).hex
+    except ValueError:
+        return jsonify({"error": "Character sheet not found."}), 404
+
+    sheet_directory = character_output_root / safe_character_id
+    sheet_path = sheet_directory / "filled_character_sheet.pdf"
+    if not sheet_path.is_file():
+        return jsonify({"error": "Character sheet not found."}), 404
+
+    return send_from_directory(
+        sheet_directory,
+        sheet_path.name,
+        mimetype="application/pdf",
+        as_attachment=False,
+        max_age=0,
+    )
+
 @app.post("/api/speech")
 def speech():
     data = request.get_json(silent=True) or {}

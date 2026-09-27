@@ -10,7 +10,7 @@ if not DATABASE_URL:
 
 # Tiger Cloud requires SSL. Include ?sslmode=require in your DATABASE_URL
 # (Tiger's own connection strings already include this by default).
-connection_pool = pool.SimpleConnectionPool(1, 10, dsn=DATABASE_URL, password = SECRET_KEY)
+connection_pool = pool.SimpleConnectionPool(1, 10, dsn=DATABASE_URL)
 
 
 def get_connection():

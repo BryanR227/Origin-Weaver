@@ -61,9 +61,10 @@ class Agent:
         generation_instructions = (
             f"{self.system_instruction}\n\n"
             "Create a D&D character sheet from the user's request. "
-            "Return a short, readable character explanation in reply and "
-            "populate the fields object using the supplied CSV field keys. "
-            "Every field value must be a string. "
+            "Return a short, readable character explanation in reply. "
+            "Return character-sheet values in the fields array as key/value pairs. "
+            "The key must exactly match one of the supplied CSV field keys. "
+            "Every value must be a string. "
             "Use an empty string for unknown, optional, or unprovided personal details "
             "instead of inventing them. "
             "Use 0 or 1 for proficiency checkbox values. "
@@ -87,17 +88,27 @@ class Agent:
             result = json.loads(response.text or "")
         except json.JSONDecodeError as error:
             raise ValueError("Gemini returned invalid character-sheet data.") from error
+        
+        returned_fields = result.get("fields", [])
 
-        if not isinstance(result, dict) or not isinstance(result.get("fields"), dict):
-            raise TypeError("Gemini returned an incomplete character sheet.")
+        if not isinstance(returned_fields, list):
+            raise TypeError("Gemini returned invalid character field data.")
 
         fields = {}
-        for key in field_keys:
-            value = result["fields"].get(key, "")
-            if value is None:
-                value = ""
-            if not isinstance(value, str):
-                raise TypeError(f"Gemini returned a non-text value for {key}.")
+
+        for item in returned_fields:
+            if not isinstance(item, dict):
+                raise TypeError("Gemini returned an invalid character field.")
+
+            key = item.get("key", "")
+            value = item.get("value", "")
+
+            if not isinstance(key, str) or not isinstance(value, str):
+                raise TypeError("Gemini returned a non-text character field.")
+
+            if key not in field_keys:
+                raise ValueError(f"Gemini returned an unknown character field: {key}")
+
             fields[key] = value
 
         reply = result.get("reply", "")

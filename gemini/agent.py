@@ -41,9 +41,18 @@ class Agent:
                     "type": "STRING"
                 },
                 "fields": {
-                    "type": "OBJECT",
-                    "additionalProperties": {
-                        "type": "STRING"
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "key": {
+                                "type": "STRING"
+                            },
+                            "value": {
+                                "type": "STRING"
+                            }
+                        },
+                        "required": ["key", "value"]
                     }
                 }
             },

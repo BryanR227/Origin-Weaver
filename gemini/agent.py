@@ -63,7 +63,6 @@ class Agent:
         )
         prompt = f"Character request:\n{message}\n\nCSV field keys:\n" + "\n".join(field_keys)
         print("Character field count:", len(field_keys))
-        print("Schema property count:", len(response_schema["properties"]["fields"]["properties"]))
         response = self.client.models.generate_content(
             model=self.model,
             contents=prompt,

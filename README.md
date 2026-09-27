@@ -27,25 +27,20 @@ Origin Weaver is an AI-assisted character-building chat for D&D 5e. Players can 
 ## How we built it
 The frontend uses HTML, CSS, and JavaScript for the chatbox and interfaces. Its styles are organized by responsibility into different stylesheets. A Python Flask server serves the frontend and exposes a `/api/chat` endpoint. That endpoint passes messages to a Gemini-powered agent built with Google's Gen AI SDK; the agent's behavior is configured by `personality.json`. The Gemini API key is read from the `GEMINI_API_KEY` environment variable rather than being placed in browser code. A looping video provides the interface background. The context for the game system is provided in organized json files divided into rules, character, etc. A python script is used to generate the character sheet from the information provided to the chatbot by the user. Tiger Data was used to create a basic user account table using PostgreSQL and connected to the frontend to enable user sign-up and authentication.
 
-
-**Challenges we ran into**<br /><br />
+## Challenges we ran into
 The first issue we ran into was not code related as we had to decide what the scope of the project is. After much deliberation the scope of the project was confirmed to be a web application with an AI chat portal that guides new players through the character creation process.
-
 While working on the Elevenlabs text to voice, we ran into the issue that the chat messages were returned in markdown format. As workaround the markdown was rewritten into a text file first. We made sure the voice package could be paused and scrubbed. Similar to other teams' experience, Snowflake was difficult to get running and merged with the Gemini layer. We decided to abandon the integration to focus on other core issues.
-
 We looked at using Vultr for training a overlayer overnight so that it may reduce the current token usage. In the essence of time guardrails were added to achieve similar results.
-
 While using Tiger Data, we had issues correcting the tunnel between the PostgreSQL database and application - specifically while using the API.
 
 
-**Accomplishments that we're proud of**<br /><br />
+## Accomplishments that we're proud of
 We are proud that we were able to come together and come about with a finished product by the evening of the first day. Our team was happy about the fact that we deployed our website successfully using a custom domain, and getting all frontend & backend components to work together succcessfully.
 
-**What we learned**<br /><br />
+## What we learned 
 Our team learned the best way to create a project from scratch, using minimal resources and with little prior experience. We also applied a lot of knowledge we gained from courses at our college.
 
-
-**What's next for Origin Weaver**<br /><br />
+## What's next for Origin Weaver
 We look to keep polishing the current project to ensure accuracy and reduce hallucinations. Afterwards, a potential addition would be the AI running a small chatbox based one-shot DnD game to onboard the new player. We'll look into clarifying the different paths. New players will be handheld through the entire character creation. For the backend, We plan to save past user sessions and character builds by using Tiger Data for users to be able to 'level up', as we are currently constrained by time and money. Additionally, the guided paths will be improved, based upon the skill level of the user. For the frontend UI, we plan on adding a feature to change the background of the chatbot (changing bartenders, etc.) and adding easter eggs for the user to interact with. To match different bartender backgrounds, there are plans to add more voicepacks for customizability. Additionally, adding chat bubbles instead of a typical chatbot interface is a feature that we plan on exploring.
 
 ## Character Sheet Generation

@@ -29,4 +29,4 @@ We are proud that we were able to come together and come about withna finished p
 
 ## Character Sheet Generation
 
-Install the Python dependencies with `pip install -r requirements.txt`. Set `CHARACTER_SHEET_TEMPLATE` to the path of a fillable D&D 5e character sheet PDF. If it is unset, the app looks for `pdf/blank_sheet.pdf` in the repository. Generated character sheets are stored under `instance/characters/` and returned in chat as a PDF preview and download link.
+Install the Python dependencies with `pip install -r requirements.txt`. The app uses `pdf/5E_CharacterSheet_Fillable (3).pdf` as its fillable D&D 5e character sheet template by default. Set `CHARACTER_SHEET_TEMPLATE` only if the template is stored at a different path on the backend. Generated character sheets are stored under `instance/characters/` and returned in chat as a PDF preview and download link.

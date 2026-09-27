@@ -1,4 +1,4 @@
-# Origin-Weaver [origin-weaver](https://origin-weaver.design/frontend/index.html)
+# Origin-Weaver [origin-weaver](https://origin-weaver.design/)
 <p align="center">
   <img width="440" height="440" alt="Screenshot 2026-09-26" src="frontend/docs/pics/favicon.webp" />
 </p>

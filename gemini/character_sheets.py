@@ -5,7 +5,7 @@ from typing import Mapping
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CSV_TEMPLATE_PATH = PROJECT_ROOT / "pdf" / "dnd_5e_character_sheet.csv"
-DEFAULT_PDF_TEMPLATE_PATH = PROJECT_ROOT / "pdf" / "blank_sheet.pdf"
+DEFAULT_PDF_TEMPLATE_PATH = PROJECT_ROOT / "pdf" / "5E_CharacterSheet_Fillable (3).pdf"
 
 
 def _load_template():

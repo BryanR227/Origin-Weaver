@@ -34,29 +34,36 @@ class Agent:
 
     def generate_character(self, message, field_keys):
         """Return a short explanation and values matching the character CSV schema."""
-        fields_schema = {
-            "type": "OBJECT",
-            "properties": {key: {"type": "STRING"} for key in field_keys},
-            "required": field_keys,
-        }
         response_schema = {
             "type": "OBJECT",
             "properties": {
-                "reply": {"type": "STRING"},
-                "fields": fields_schema,
+                "reply": {
+                    "type": "STRING"
+                },
+                "fields": {
+                    "type": "OBJECT",
+                    "additionalProperties": {
+                        "type": "STRING"
+                    }
+                }
             },
-            "required": ["reply", "fields"],
+            "required": ["reply", "fields"]
         }
         generation_instructions = (
             f"{self.system_instruction}\n\n"
-            "Create a D&D character sheet from the user's request. Return the short, readable "
-            "character explanation in reply and a value for every supplied CSV key in fields. "
-            "Every field value must be a string. Use an empty string for unknown, optional, or "
-            "unprovided personal details instead of inventing them. Use 0 or 1 for proficiency "
-            "checkbox values. Keep comma-separated values suitable for the CSV sheet. Use "
-            "standard D&D 5e conventions and do not claim access to exhaustive source catalogs."
+            "Create a D&D character sheet from the user's request. "
+            "Return a short, readable character explanation in reply and "
+            "populate the fields object using the supplied CSV field keys. "
+            "Every field value must be a string. "
+            "Use an empty string for unknown, optional, or unprovided personal details "
+            "instead of inventing them. "
+            "Use 0 or 1 for proficiency checkbox values. "
+            "Keep comma-separated values suitable for the CSV sheet. "
+            "Use standard D&D 5e conventions and do not claim access to exhaustive source catalogs."
         )
         prompt = f"Character request:\n{message}\n\nCSV field keys:\n" + "\n".join(field_keys)
+        print("Character field count:", len(field_keys))
+        print("Schema property count:", len(response_schema["properties"]["fields"]["properties"]))
         response = self.client.models.generate_content(
             model=self.model,
             contents=prompt,

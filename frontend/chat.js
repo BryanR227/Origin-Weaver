@@ -10,11 +10,14 @@
         const authModeButtons = document.querySelectorAll("[data-auth-mode]");
         const authTitle = document.getElementById("authTitle");
         const authForm = document.getElementById("authForm");
+        const authEmail = document.getElementById("authEmail");
         const authPassword = document.getElementById("authPassword");
         const authConfirmField = document.getElementById("authConfirmField");
         const authConfirmPassword = document.getElementById("authConfirmPassword");
         const authSubmit = document.getElementById("authSubmit");
         const authStatus = document.getElementById("authStatus");
+
+        let currentUser = null;
 
         const questionnaireByLevel = {
             new: [
@@ -54,10 +57,38 @@
             });
         }
 
-        accountButton.addEventListener("click", () => {
+       function updateAccountButton() {
+            accountButton.textContent = currentUser ? currentUser.email : "Sign in / Sign up";
+        }
+
+        async function checkSession() {
+            try {
+                const response = await fetch("/api/auth/me", { credentials: "same-origin" });
+                const data = await response.json();
+                currentUser = data.user || null;
+            } catch {
+                currentUser = null;
+            }
+            updateAccountButton();
+        }
+
+        accountButton.addEventListener("click", async () => {
+            if (currentUser) {
+                accountButton.disabled = true;
+                try {
+                    await fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" });
+                } catch {
+                    // Ignore network errors on logout; we clear local state regardless.
+                }
+                currentUser = null;
+                updateAccountButton();
+                accountButton.disabled = false;
+                return;
+            }
+
             setAuthMode("signin");
             authDialog.showModal();
-            document.getElementById("authEmail").focus();
+            authEmail.focus();
         });
 
         closeAuthButton.addEventListener("click", () => authDialog.close());
@@ -70,7 +101,7 @@
             authConfirmPassword.setCustomValidity("");
         });
 
-        authForm.addEventListener("submit", (event) => {
+        authForm.addEventListener("submit", async (event) => {
             event.preventDefault();
 
             const isSignUp = authConfirmField.hidden === false;
@@ -83,7 +114,36 @@
                 }
             }
 
-            authStatus.textContent = "Authentication is not connected yet; this form is a preview.";
+            const email = authEmail.value.trim();
+            const password = authPassword.value;
+
+            authSubmit.disabled = true;
+            authStatus.textContent = isSignUp ? "Creating your account…" : "Signing in…";
+
+            try {
+                const endpoint = isSignUp ? "/api/auth/signup" : "/api/auth/login";
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "same-origin",
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    authStatus.textContent = data.error || "Something went wrong. Please try again.";
+                    return;
+                }
+
+                currentUser = data.user;
+                updateAccountButton();
+                authStatus.textContent = "Success!";
+                setTimeout(() => authDialog.close(), 400);
+            } catch (error) {
+                authStatus.textContent = "Could not reach the server. Please try again.";
+            } finally {
+                authSubmit.disabled = false;
+            }
         });
 
         authDialog.addEventListener("click", (event) => {
@@ -98,6 +158,8 @@
                 authDialog.close();
             }
         });
+
+        checkSession();
 
         experienceOptions.addEventListener("click", (event) => {
             const button = event.target.closest("button[data-level]");

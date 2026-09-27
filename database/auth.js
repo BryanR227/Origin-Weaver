@@ -3,7 +3,7 @@
 
 (function () {
   // Change this if your backend runs somewhere other than localhost:3001.
-  const API_BASE = 'http://localhost:3001/api/auth';
+  const API_BASE = '/api/auth';
 
   const TOKEN_KEY = 'ow_token';
   const USER_KEY = 'ow_user';

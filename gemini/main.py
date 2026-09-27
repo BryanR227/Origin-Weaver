@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 from flask import (Flask, Response, jsonify, request, send_from_directory,
                    url_for)
 from google.genai.errors import ClientError, ServerError
+from auth import auth_bp
 
 load_dotenv(override=True)
 
@@ -35,7 +36,11 @@ character_build_pattern = re.compile(
 )
 
 app = Flask(__name__, static_folder="../frontend", static_url_path="")
+# Needed so Flask can sign session cookies (used for login sessions).
+# Set SECRET_KEY in your .env for anything beyond local dev.
+app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-me")
 
+app.register_blueprint(auth_bp)
 @app.get("/")
 def home():
     return send_from_directory(app.static_folder, "index.html")
@@ -179,4 +184,5 @@ def speech():
     return Response(audio, mimetype="audio/mpeg", headers={"Cache-Control": "no-store"})
     
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)

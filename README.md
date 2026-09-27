@@ -14,11 +14,11 @@ The frontend uses HTML, CSS, and JavaScript for the chatbox and interfaces. Its 
 
 
 **Challenges we ran into**<br /><br />
-The first issue we ran into was not code related as we had to decide what the scope of the project is. Then we portioned the work between the group members based on experience. For the frontend, the landing evolved from a basic chatbot page to themed paged with a animated background. While working on the Elevenlabs text to voice, we ran into the issue that the chat messages were returned in markdown format. As workaround the markdown was rewritten into a text file first. We made sure the voice package could be paused and scrubbed. 
+The first issue we ran into was not code related as we had to decide what the scope of the project is. After much deliberation the scope of the project was confirmed to be a web application with an AI chat portal that guides new players through the character creation process. While working on the Elevenlabs text to voice, we ran into the issue that the chat messages were returned in markdown format. As workaround the markdown was rewritten into a text file first. We made sure the voice package could be paused and scrubbed. Similar to other teams' experience, Snowflake was difficult to get running and merged with the Gemini layer. We decided to abandon the integration to focus on other core issues. We looked at using Vultr for training a overlayer overnight so that it may reduce the current token usage. In the essence of time guardrails were added to achieve similar results.
 
 
 **Accomplishments that we're proud of**<br /><br />
-We are proud that we were able to come together and come about withna finished product by the evening of the first day.
+We are proud that we were able to come together and come about with a finished product by the evening of the first day.
 
 
 **What we learned**<br /><br />
@@ -26,6 +26,7 @@ We are proud that we were able to come together and come about withna finished p
 
 
 **What's next for Origin Weaver**<br /><br />
+We look to keep polishing the current project to ensure accuracy and reduce hallucinations. Afterwards a potential addition would be the AI running a small chatbox based oneshot to onboard the new player. We'll look into clarifying the different paths. Newish player will be 
 
 ## Character Sheet Generation
 
